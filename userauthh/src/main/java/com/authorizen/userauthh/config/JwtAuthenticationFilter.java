@@ -9,6 +9,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 
@@ -24,6 +25,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         )
             throws ServletException, IOException {
                 final String authheader = request.getHeader("Authorization");
+                final String jwt;
+
+                if(authheader == null || !authheader.startsWith("Bearer ")){
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+                jwt = authheader.substring(7);
                 
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
