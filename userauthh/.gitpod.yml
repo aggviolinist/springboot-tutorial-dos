@@ -1,0 +1,4 @@
+tasks:
+# Setting up PSQL Client
+  - name: Setup Postgres Client
+    init: ./bin/install_psql.sh
