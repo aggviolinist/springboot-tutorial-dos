@@ -18,11 +18,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-        HttpServletRequest request, 
-        HttpServletResponse response, 
-        FilterChain filterChain
+        @NonNull HttpServletRequest request, 
+        @NonNull HttpServletResponse response, 
+        @NonNull FilterChain filterChain
         )
             throws ServletException, IOException {
+                final String authheader = request.getHeader("Authorization");
+                
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
     }
