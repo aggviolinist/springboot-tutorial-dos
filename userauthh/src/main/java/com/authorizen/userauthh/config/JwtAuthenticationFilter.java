@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+
+    private final JwtService jwtService;
     @Override
     protected void doFilterInternal(
         @NonNull HttpServletRequest request, 
@@ -26,15 +28,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
                 final String authheader = request.getHeader("Authorization");
                 final String jwt;
+                final String userEmail; 
 
                 if(authheader == null || !authheader.startsWith("Bearer ")){
                     filterChain.doFilter(request, response);
                     return;
                 }
                 jwt = authheader.substring(7);
+                userEmail = jwtService.extractUsername(jwt); // todo extract email from JWT token;
                 
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
+        //throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
     }
     
     
