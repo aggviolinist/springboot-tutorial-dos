@@ -24,15 +24,6 @@ public class JwtService {
 
     private static final String SECRET_KEY = "7a1ca2c8afd7e73cf0c6b4350e89a5d19d9351892d453c8381e09447331457aa";
 
-    public String extractUsername(String token){
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
@@ -48,6 +39,15 @@ public class JwtService {
         .signWith(getSignInKey()) // Sign with key only; algorithm is inferred
         .compact();
 }
+    private SecretKey getSignInKey() {
+
+        byte[] SecretKeyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(SecretKeyBytes);
+        
+        // TODO Auto-generated method stub
+       // throw new UnsupportedOperationException("Unimplemented method 'getSignInKey'");
+    }
+
     // private Claims extractAllClaims(String token){
     //     return Jwts
     //         .parserBuilder()
@@ -56,6 +56,9 @@ public class JwtService {
     //         .parseClaimsJws(token)
     //         .getBody();
     // }
+     public String extractUsername(String token){
+        return extractClaim(token, Claims::getSubject);
+    }
 
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);
@@ -67,8 +70,12 @@ public class JwtService {
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
+    
+     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
 
-    public 
     private Claims extractAllClaims(String token){
     return Jwts
         .parser() // Use parser() instead of parserBuilder()
@@ -77,13 +84,5 @@ public class JwtService {
         .parseSignedClaims(token) // Use parseSignedClaims() instead of parseClaimsJws()
         .getPayload(); // Use getPayload() instead of getBody()
 }
-    private SecretKey getSignInKey() {
-
-        byte[] SecretKeyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(SecretKeyBytes);
-        
-        // TODO Auto-generated method stub
-       // throw new UnsupportedOperationException("Unimplemented method 'getSignInKey'");
-    }
 
 }
