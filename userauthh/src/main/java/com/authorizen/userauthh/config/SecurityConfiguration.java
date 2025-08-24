@@ -1,6 +1,7 @@
 package com.authorizen.userauthh.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,11 +16,16 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private AuthenticationProvider authenticationProvider;
-    private Filter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;    
+    private final Filter jwtAuthFilter;
+
+     public SecurityConfiguration(AuthenticationProvider authenticationProvider, 
+                                 @Qualifier("jwtAuthenticationFilter") Filter jwtAuthFilter) {
+        this.authenticationProvider = authenticationProvider;
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -27,7 +33,7 @@ public class SecurityConfiguration {
           .csrf()
           .disable()
           .authorizeHttpRequests()
-          .requestMatchers("/api/v1/auth/**")
+          .requestMatchers("/api/v1/auth/**") 
           .permitAll()
           .anyRequest()
           .authenticated()
