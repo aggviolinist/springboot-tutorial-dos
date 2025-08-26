@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @AllArgsConstructor
+@Builder
 @Table(name = "catalogue")
 
 public class Admin {
