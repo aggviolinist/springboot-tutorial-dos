@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@AllArgsConstructor
 @Table(name = "catalogue")
 
 public class Admin {
@@ -25,5 +26,7 @@ public class Admin {
     private Integer carprice;
 
     private Integer timeline;
+
+    private String imageUrl;
     
 }
