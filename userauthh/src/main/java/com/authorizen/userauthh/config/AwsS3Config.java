@@ -14,22 +14,24 @@ import org.springframework.context.annotation.Configuration;
 public class AwsS3Config {
 
     @Value("${cloud.aws.credentials.access-key}")
-    private String AWS_ACCESS_KEY_ID;
+        private String accessKey;
 
-    @Value("${cloud.aws.credentials.secret-key}")
-    private String AWS_SECRET_ACCESS_KEY;
+            @Value("${cloud.aws.credentials.secret-key}")
+                private String secretKey;
 
-    @Value("${cloud.aws.region.static}")
-    private String AWS_REGION;
+                    @Value("${cloud.aws.region.static}")
+                        private String region;
 
-    @Bean
-    public AmazonS3 amazonS3Client() {
-        BasicAWSCredentials credentials = new BasicAWSCredentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
-        
-        return AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.fromName(AWS_REGION))
-                .build();
-    }
-}
+                            @Bean
+                                public AmazonS3 amazonS3Client() {
+                                        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+                                                
+                                                        return AmazonS3ClientBuilder
+                                                                        .standard()
+                                                                                        .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                                                                                                        .withRegion(Regions.fromName(region))
+                                                                                                                        .build();
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                            
+                                                                                                                            
