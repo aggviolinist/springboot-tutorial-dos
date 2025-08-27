@@ -28,24 +28,45 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-          .csrf()
-          .disable()
-          .authorizeHttpRequests()
-          .requestMatchers("/api/v1/auth/**","/api/v1/public")
-          .permitAll()
-          .anyRequest()
-          .authenticated()
-          .and()
-          .sessionManagement()
-          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-          .and()
-          .authenticationProvider(authenticationProvider)
-          .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    //     http
+    //       .csrf()
+    //       .disable()
+    //       .authorizeHttpRequests()
+    //       .requestMatchers("/api/v1/auth/**","/api/v1/public")
+    //       .permitAll()
+    //       .anyRequest()
+    //       .authenticated()
+    //       .and()
+    //       .sessionManagement()
+    //       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    //       .and()
+    //       .authenticationProvider(authenticationProvider)
+    //       .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 
           
-          return http.build();
-    }
+    //       return http.build();
+    // }
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        //.csrf()
+        //.disable()
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers("/api/v1/auth/image/add-car")
+        )
+        .authorizeHttpRequests()
+        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register") // Only permit paths for registration and authentication
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authenticationProvider(authenticationProvider)
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
 
     
 }

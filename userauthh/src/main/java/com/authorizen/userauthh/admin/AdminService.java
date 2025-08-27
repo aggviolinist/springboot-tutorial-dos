@@ -28,4 +28,13 @@ public class AdminService {
         // 3. Save the car to the database and return it
         return adminRepository.save(newCar);
     }
+    // public Admin addCarWithoutImage(CarDetailsRequest request) {
+    //     Admin newCar = Admin.builder()
+    //             .carname(request.getCarname())
+    //             .carprice(request.getCarprice())
+    //             .timeline(request.getTimeline())
+    //             .build(); // imageUrl is omitted
+
+    //     return adminRepository.save(newCar);
+    // }
 }

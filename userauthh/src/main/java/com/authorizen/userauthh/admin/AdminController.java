@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/v1/auth/image")
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -21,4 +21,10 @@ public class AdminController {
         Admin newCar = adminService.addCar(carRequest);
         return new ResponseEntity<>(newCar, HttpStatus.CREATED);
     }
+    //  @PostMapping("/add-car-no-image")
+    // public ResponseEntity<Admin> addCarWithoutImage(@RequestBody CarDetailsRequest carDetailsRequest) {
+    //     // You would create a service method to handle this
+    //     Admin newCar = adminService.addCarWithoutImage(carDetailsRequest);
+    //     return new ResponseEntity<>(newCar, HttpStatus.CREATED);
+    // }
 }
