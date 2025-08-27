@@ -14,9 +14,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth/user")
 public class ProfileViewController {
-
+    
+    private final ProfileViewService profileViewService; // Inject the service here
     // Endpoint for viewing a car (viewing task)
-    @GetMapping("/view/user/{userId}/profile/{profile}")
+    @GetMapping("/view/profile/{userId}/profile/{profileId}")
     public ResponseEntity<UserProfileResponse> getUserCarDetails(
             @PathVariable Integer userId,
             @PathVariable Integer profileId) {
