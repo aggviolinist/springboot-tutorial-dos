@@ -21,7 +21,7 @@ public class ProfileViewController {
     public ResponseEntity<UserProfileResponse> getUserCarDetails(
             @PathVariable Integer userId,
             @PathVariable Integer profileId) {
-        UserProfileResponse response = ProfileViewService.getProfileViewDetails(userId, profileId);
+        UserProfileResponse response = profileViewService.getProfileViewDetails(userId, profileId);
         return ResponseEntity.ok(response);
     }
     
