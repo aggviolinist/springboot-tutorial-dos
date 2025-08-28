@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.authorizen.userauthh.dto.UserProfileResponse;
+import com.authorizen.userauthh.dto.UserProfileRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,10 +18,10 @@ public class ProfileViewController {
     private final ProfileViewService profileViewService; // Inject the service here
     // Endpoint for viewing a car (viewing task)
     @GetMapping("/view/profile/{userId}/profile/{profileId}")
-    public ResponseEntity<UserProfileResponse> getUserCarDetails(
+    public ResponseEntity<UserProfileRequest> getUserCarDetails(
             @PathVariable Integer userId,
             @PathVariable Integer profileId) {
-        UserProfileResponse response = profileViewService.getProfileViewDetails(userId, profileId);
+        UserProfileRequest response = profileViewService.getProfileViewDetails(userId, profileId);
         return ResponseEntity.ok(response);
     }
     

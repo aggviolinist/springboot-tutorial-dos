@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.authorizen.userauthh.config.JwtService;
+import com.authorizen.userauthh.dto.AuthenticationResponse;
+import com.authorizen.userauthh.dto.RegisterRequest;
+import com.authorizen.userauthh.dto.loginRequest;
 import com.authorizen.userauthh.model.Role;
 import com.authorizen.userauthh.model.User;
 import com.authorizen.userauthh.repository.UserRepository;
@@ -23,6 +26,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        // Check if a user with this email already exists
+    if (repository.findByEmail(request.getEmail()).isPresent()) {
+        // If an account with the email is found, throw an exception
+        // This prevents creating a duplicate account
+        throw new IllegalArgumentException("Email already in use.");
+    }
         var user = User.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())

@@ -2,7 +2,7 @@ package com.authorizen.userauthh.profile;
 
 import org.springframework.stereotype.Service;
 
-import com.authorizen.userauthh.dto.UserProfileResponse;
+import com.authorizen.userauthh.dto.UserProfileRequest;
 import com.authorizen.userauthh.model.Admin;
 import com.authorizen.userauthh.model.User;
 import com.authorizen.userauthh.repository.AdminRepository;
@@ -20,7 +20,7 @@ public class ProfileViewService {
 
     //import UserprofileResponse Dto
 
-    public UserProfileResponse getProfileViewDetails(Integer userId, Integer profileId) {
+    public UserProfileRequest getProfileViewDetails(Integer userId, Integer profileId) {
         // Fetch user information
         Optional<User> user = userRepository.findById(userId);
 
@@ -30,7 +30,7 @@ public class ProfileViewService {
         // Check if both user and car records exist
         if (user.isPresent() && car.isPresent()) {
             // Build and return the DTO
-            return UserProfileResponse.builder()
+            return UserProfileRequest.builder()
                     .firstname(user.get().getFirstname())
                     .imageUrl(car.get().getImageUrl())
                     .build();

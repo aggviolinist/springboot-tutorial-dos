@@ -1,4 +1,4 @@
-package com.authorizen.userauthh.auth;
+package com.authorizen.userauthh.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

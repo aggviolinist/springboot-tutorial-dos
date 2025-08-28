@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserProfileResponse  {
+public class UserProfileRequest  {
     private String firstname;
     private String imageUrl;
     

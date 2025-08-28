@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.authorizen.userauthh.dto.AuthenticationResponse;
+import com.authorizen.userauthh.dto.RegisterRequest;
+import com.authorizen.userauthh.dto.loginRequest;
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
@@ -17,6 +23,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
+        @Valid
         @RequestBody RegisterRequest request
     ){
         return ResponseEntity.ok(service.register(request));
