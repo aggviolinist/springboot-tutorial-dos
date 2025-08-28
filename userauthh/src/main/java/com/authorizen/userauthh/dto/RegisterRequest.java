@@ -1,5 +1,7 @@
 package com.authorizen.userauthh.dto;
 
+import com.authorizen.userauthh.auth.PasswordMatches;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@PasswordMatches 
 public class RegisterRequest {
 
     @NotBlank(message = "First name is required")
