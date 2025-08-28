@@ -48,13 +48,13 @@ public class SecurityConfiguration {
     // }
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
-        //.csrf()
-        //.disable()
-        .csrf(csrf -> csrf
-            .ignoringRequestMatchers("/api/v1/auth/image/add-car")
-        )
+        .csrf()
+        .disable()
+        // .csrf(csrf -> csrf
+        //     .ignoringRequestMatchers("/api/v1/auth/image/add-car")
+        // )
         .authorizeHttpRequests()
-        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register") // Only permit paths for registration and authentication
+        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register","/api/v1/auth/image/add-car") // Only permit paths for registration and authentication
         .permitAll()
         .anyRequest()
         .authenticated()
