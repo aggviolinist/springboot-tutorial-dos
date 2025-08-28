@@ -1,3 +1,5 @@
+package com.authorizen.userauthh.auth;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import com.authorizen.userauthh.dto.RegisterRequest; // Your DTO
