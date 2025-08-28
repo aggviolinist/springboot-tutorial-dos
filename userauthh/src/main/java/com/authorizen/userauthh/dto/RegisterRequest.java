@@ -19,6 +19,7 @@ public class RegisterRequest {
     @NotBlank(message = "Last name is required")
     private String lastname;
 
+    @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid") // This is the key annotation
     private String email;
 
