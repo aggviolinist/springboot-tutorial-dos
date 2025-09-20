@@ -11,19 +11,19 @@ public enum Role {
     USER(Collections.emptySet()),
     ADMIN(
         Set.of(
-            permissions.ADMIN_READ,
-            permissions.ADMIN_CREATE,
-            permissions.ADMIN_UPDATE,
-            permissions.ADMIN_DELETE
+            Permissions.ADMIN_READ,
+            Permissions.ADMIN_CREATE,
+            Permissions.ADMIN_UPDATE,
+            Permissions.ADMIN_DELETE
 
         )       
     ),
     MANAGER(
         Set.of(
-            permissions.MANAGER_READ,
-            permissions.MANAGER_CREATE,
-            permissions.MANAGER_UPDATE,
-            permissions.MANAGER_DELETE
+            Permissions.MANAGER_READ,
+            Permissions.MANAGER_CREATE,
+            Permissions.MANAGER_UPDATE,
+            Permissions.MANAGER_DELETE
         )
     );
 
