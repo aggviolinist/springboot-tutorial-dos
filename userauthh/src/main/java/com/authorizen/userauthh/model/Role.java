@@ -3,6 +3,7 @@ package com.authorizen.userauthh.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,10 +36,10 @@ public enum Role {
     private final Set<Permissions> permissions;
 
     public List<SimpleGrantedAuthority> getAuthorities(){
-        var authorities = getPermissions() Set<Permissions>
-                .stream() Stream<Permissions>
-                .map(permissions -> new SimpleGrantedAuthority(permissions.name())) Stream<SimpleGrantedAuthority>
-                .toList();
+        List<SimpleGrantedAuthority> authorities = getPermissions()
+                .stream()
+                .map(perm -> new SimpleGrantedAuthority(perm.name()))
+                .collect(Collectors.toList());
             authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
             return authorities;
 

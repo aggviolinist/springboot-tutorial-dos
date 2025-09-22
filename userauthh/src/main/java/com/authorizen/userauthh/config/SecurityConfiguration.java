@@ -14,6 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 
+import static com.authorizen.userauthh.model.Role.ADMIN;
+import static com.authorizen.userauthh.model.Permissions.*;
+
+import static org.springframework.http.HttpMethod.*;
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -57,6 +63,16 @@ public class SecurityConfiguration {
             // 2. Clearer way to define public and protected endpoints
             .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login")
             .permitAll()
+
+            .requestMatchers(GET,"/api/v1/admin/**").hasAuthority(ADMIN_READ.name())
+            .requestMatchers(POST,"/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
+            .requestMatchers(PUT,"/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
+            .requestMatchers(DELETE,"/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())
+            .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
+
+
+
+
             .anyRequest()
             .authenticated()
         )
