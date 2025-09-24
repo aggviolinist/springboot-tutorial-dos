@@ -78,6 +78,13 @@
             <version>1.12.637</version> 
         </dependency>
 
+        <!-- Websocket dependency -->
+		<dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!-- Websocket dependency -->
+
 		<dependency>
            <groupId>org.springframework.boot</groupId>
            <artifactId>spring-boot-starter-validation</artifactId>
