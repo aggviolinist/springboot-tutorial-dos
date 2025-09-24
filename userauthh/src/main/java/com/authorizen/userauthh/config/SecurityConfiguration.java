@@ -72,7 +72,6 @@ public class SecurityConfiguration {
 
 
 
-
             .anyRequest()
             .authenticated()
         )
