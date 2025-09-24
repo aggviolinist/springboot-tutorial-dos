@@ -61,7 +61,7 @@ public class SecurityConfiguration {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
             // 2. Clearer way to define public and protected endpoints
-            .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login")
+            .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login","/web/sockets/**", "/ws/**")
             .permitAll()
 
             .requestMatchers(GET,"/api/v1/admin/**").hasAuthority(ADMIN_READ.name())
